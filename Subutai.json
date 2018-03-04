@@ -8,7 +8,7 @@
       "hostname":"web-apache",
       "template":"ubuntu16",
       "peer-criteria":"free peers",
-      "size":"TINY",
+      "size":"SMALL",
       "port-mapping":[
         {
           "protocol":"http",
