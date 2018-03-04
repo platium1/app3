@@ -33,6 +33,7 @@
     "groups": [
       {
         "name": "web-group",
+        "python-interpreter": "/usr/bin/python3",
         "hostnames": [ "web-apache" ]
       }
     ]
