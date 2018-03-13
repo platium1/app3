@@ -1,62 +1,43 @@
 {
-  "name": "${envName}",
-  "description": "example static website",
-  "version": "1.0.0",
-  "author": "github.com/samsonbek",
-  "containers":[
+  "name": "My-Website",
+  "description": "My static website",
+  "containers": [
     {
-      "hostname":"web-apache",
-      "template":"ubuntu16",
-      "peer-criteria":"free peers",
-      "size":"SMALL"
+      "hostname": "www",
+      "template": "apache",
+      "peer-criteria": "HTTP-GROUP",
+      "size": "MEDIUM",
+      "port-mapping": [
+        {
+          "protocol": "http",
+          "domain": "${domain}",
+          "internal-port": "80",
+          "external-port": "80"
+        },
+        {
+          "protocol": "tcp",
+          "domain": "${domain}",
+          "internal-port": "22",
+          "external-port": "4040"
+        }
+      ]
     }
   ],
-  "peer-criteria":[
+  "peer-criteria": [
     {
-      "name": "free peers",
-      "max-price": "0"
+      "name": "HTTP-GROUP",
+      "max-price": "5",
+      "avg-cpu-load": "50",
+      "min-free-ram": "128",
+      "min-free-disk-space": "10"
     }
   ],
-  "ansible-configuration": {
-    "source-url": "https://github.com/samsonbek/helloworld-bp/archive/master.zip",
-    "ansible-playbook": "main.yaml",
-    "extra-vars": [
-      {
-        "key": "htmlFileName",
-        "value": "${filename}"
-      },
-      {
-        "key": "htmlContent",
-        "value": "test"
-      }
-    ],
-    "groups": [
-      {
-        "name": "web-group",
-        "python-interpreter": "/usr/bin/python3",
-        "hostnames": [ "web-apache" ]
-      }
-    ]
-  },
-  "user-variables":
-  {
-    "envName": {
-      "description": "Enter environment name, must container only letters",
-      "type": "string",
-      "default": "HelloWWWorld",
-      "validation": "[a-zA-Z]+"
-    },
-    "domainName": {
-      "description": "Select domain name",
+  "user-variables": {
+    "domain": {
+      "description": "Select your domain or create new one",
       "type": "domain",
-      "default": "",
-      "validation": "[a-zA-Z0-9]+"
-    },
-    "filename": {
-      "description": "name of file in apache dir",
-      "type": "string",
-      "default": "about.html",
-      "validation": "[a-zA-Z0-9.]+"
+      "default": "mysite.envs.subutai.cloud",
+      "validation": "[a-zA-Z0-9.-]+"
     }
   }
 }
