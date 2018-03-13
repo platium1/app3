@@ -16,7 +16,7 @@
         },
         {
           "protocol": "tcp",
-          "domain": "${domain}",
+          "domain": "${domain1}",
           "internal-port": "22",
           "external-port": "4040"
         }
@@ -34,6 +34,12 @@
   ],
   "user-variables": {
     "domain": {
+      "description": "Select your domain or create new one",
+      "type": "domain",
+      "default": "mysite.envs.subutai.cloud",
+      "validation": "[a-zA-Z0-9.-]+"
+    },
+    "domain1": {
       "description": "Select your domain or create new one",
       "type": "domain",
       "default": "mysite.envs.subutai.cloud",
